@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Status")]
+    [SerializeField] private float score;
+
     [Header("Movement Configuration")]
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float movementSpeed;
@@ -98,5 +101,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    #region "MyMethods"
+
+    public void AddScore(float value)
+    {
+        score += value;
+    }
+
+    #endregion
 
 }
