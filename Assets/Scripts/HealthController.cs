@@ -8,17 +8,32 @@ public class HealthController : MonoBehaviour
     [SerializeField] private float currentLife;
     [SerializeField] private UnityEvent onZeroHealthPointsActions;
 
+    [Header("Dependencies")]
+    [SerializeField] private HudController hudController;
+
     // Start is called before the first frame update
     void Start()
     {
         currentLife = maxLife;
+
+        if(hudController != null)
+        {
+            hudController.SetMaxHealthBar(maxLife);
+            hudController.SetHealthBar(currentLife);
+        }
+        
     }
 
     public void OnDamage(float damage)
     {
         currentLife -= damage;
 
-        if(currentLife <= 0)
+        if(hudController != null)
+        {
+            hudController.SetHealthBar(currentLife);
+        }        
+
+        if (currentLife <= 0)
         {
             OnZeroHealthPoints();
         }

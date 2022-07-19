@@ -26,12 +26,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Animator animator;
+    [SerializeField] private HudController scoreText;
 
     //private
     private float gravity = -30f;
     private Vector3 velocity;
     private bool isGrounded;
     private float nextShoot;
+
+    void Start()
+    {
+        if(scoreText != null)
+        {
+            scoreText.SetScore(score);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -106,6 +115,11 @@ public class PlayerController : MonoBehaviour
     public void AddScore(float value)
     {
         score += value;
+
+        if(scoreText != null)
+        {
+            scoreText.SetScore(score);
+        }
     }
 
     #endregion
